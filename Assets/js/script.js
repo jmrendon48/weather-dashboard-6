@@ -49,6 +49,7 @@ var loadSearchHistory = function() {
     // turn saved search history string into array
     savedSearchHistory = JSON.parse(savedSearchHistory);
 
+    // go through savedSearchHistory array and make entry for each item in the list
     for (var i = 0; i < savedSearchHistory.length; i++) {
         searchHistoryList(savedSearchHistory[i]);
     }
