@@ -22,6 +22,7 @@
     height: 40px;
     border-color: lightgrey;
     border-width: thin;
+    padding: 0 15px;
 }
 
 .search-button {
