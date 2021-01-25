@@ -46,3 +46,44 @@
     padding: 0 20px;
     color: grey;
 }
+
+.current-weather-container {
+    border-color: lightgrey;
+    border-width: thin 0 thin thin;
+    border-style: solid;
+    border-radius: 3px;
+    margin: 20px 0 0 20px;
+    padding: 0 0 12px 0;
+}
+
+.current-title {
+    font-size: 40px;
+    margin: 15px 0 30px 20px;
+}
+
+.current-temperature, .current-humidity, .current-wind-speed, .current-uv-index {
+    margin: 15px 20px;
+    font-size: 20px;
+}
+
+.future-forecast-container {
+    margin: 5px 20px 0 20px;
+}
+
+.future-forecast-title {
+    font-size: 27px;
+}
+
+.future-card {
+    width: 17%;
+    padding: 7px 0 0 7px;
+}
+
+.future-date {
+    font-size: 23px;
+}
+
+.future-temp, .future-humidity {
+    font-size: 17px;
+    font-weight: 200;
+}

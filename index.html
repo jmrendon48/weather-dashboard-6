@@ -9,7 +9,7 @@
     <link 
     rel="stylesheet" 
     href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-    <link
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.min.css">
     <link rel="stylesheet" href="./Assets/css/style.css">
     <title>Weather Dashboard</title>
 </head>
@@ -64,10 +64,52 @@
                 </div>
     
                 <!-- column 2 -->
-                <div class="col-sm-8">
+                <div class="col-sm-8 p-0">
                     <!-- current weather conditions -->
-                    <div>
-                        
+                    <div class="row current-weather-container d-block">
+                        <!-- current weather title -->
+                        <h2 class="current-title">placeholder title</h2>
+                        <!-- current weather temperature -->
+                        <p class="current-temperature" id="current-temperature">Temperature:</p>
+                        <!-- current weather humidity -->
+                        <p class="current-humidity" id="current-humidity">Humidity:</p>
+                        <!-- current weather wind speed -->
+                        <p class="current-wind-speed" id="current-wind-speed">Wind Speed:</p>
+                        <!-- current weather uv index -->
+                        <p class="current-uv-index" id="current-uv-index">UV Index:</p>
+                    </div>
+                    <!-- 5 day forecast -->
+                    <div class="row future-forecast-container d-block">
+                        <!-- 5 day forecast title-->
+                        <h2 class="future-forecast-title" id="future-forecast-title">5-Day Forecast:</h2>
+                        <div id="forecasts-cards-container" class="forecasts-cards-container d-flex justify-content-between">
+                            <!-- future day forecard card -->
+                            <div class="future-card bg-primary rounded">
+                                <p class="future-date" id="future-date-1">1/25/2021</p>
+                                <p class="future-temp" id="future-temp-1">Temp: Cold</p>
+                                <p class="future-humidity" id="future-humidity-1">Humidity: 43%</p>
+                            </div>
+                            <div class="future-card bg-primary rounded">
+                                <p class="future-date" id="future-date-2">1/25/2021</p>
+                                <p class="future-temp" id="future-temp-2">Temp: Cold</p>
+                                <p class="future-humidity" id="future-humidity-2">Humidity: 43%</p>
+                            </div>
+                            <div class="future-card bg-primary rounded">
+                                <p class="future-date" id="future-date-3">1/25/2021</p>
+                                <p class="future-temp" id="future-temp-3">Temp: Cold</p>
+                                <p class="future-humidity" id="future-humidity-3">Humidity: 43%</p>
+                            </div>
+                            <div class="future-card bg-primary rounded">
+                                <p class="future-date" id="future-date-4">1/25/2021</p>
+                                <p class="future-temp" id="future-temp-4">Temp: Cold</p>
+                                <p class="future-humidity" id="future-humidity-4">Humidity: 43%</p>
+                            </div>
+                            <div class="future-card bg-primary rounded">
+                                <p class="future-date" id="future-date-5">1/25/2021</p>
+                                <p class="future-temp" id="future-temp-5">Temp: Cold</p>
+                                <p class="future-humidity" id="future-humidity-5">Humidity: 43%</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
