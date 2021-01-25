@@ -28,7 +28,7 @@
                 <div class="col-sm-4 bg-light p-0">
                     <!-- search form -->
                     <div class="form-container">
-                        <form>
+                        <form id="search-form">
                             <!-- search input label -->
                             <div class="row m-0">
                                 <label for="search-input" class="search-label m-0 text-dark">Search for a City:</label>
@@ -47,19 +47,8 @@
                         </form>
                     </div>
                     <!-- search history -->
-                    <div class="row m-0 search-history-container">
-                        <div class="past-search-container">
-                            <p class="past-search">sample</p>
-                        </div>    
-                        <div class="past-search-container">
-                            <p class="past-search">sample</p>
-                        </div>
-                        <div class="past-search-container">
-                            <p class="past-search">sample</p>
-                        </div>    
-                        <div class="past-search-container">
-                            <p class="past-search">sample</p>
-                        </div>     
+                    <div id="search-history-container" class="row m-0 search-history-container">
+  
                     </div>
                 </div>
     
@@ -117,6 +106,7 @@
     </main>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="./Assets/js/script.js"></script>
 </body>
 </html>
