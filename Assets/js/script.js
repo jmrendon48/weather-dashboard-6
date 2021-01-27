@@ -201,6 +201,10 @@ $("#search-history-container").on("click", "p", function() {
     var previousCityName = $(this).text();
     currentWeatherSection(previousCityName);
     fiveDayForecastSection(previousCityName);
+
+    //
+    var previousCityClicked = $(this);
+    previousCityClicked.remove();
 });
 
 loadSearchHistory();
