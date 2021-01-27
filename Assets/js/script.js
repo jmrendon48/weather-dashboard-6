@@ -72,6 +72,8 @@ var currentWeatherSection = function(cityName) {
                 })
                 // get data from response and apply them to the current weather section
                 .then(function(response){
+                    searchHistoryList(cityName);
+
                     // add current weather container with border to page
                     var currentWeatherContainer = $("#current-weather-container");
                     currentWeatherContainer.addClass("current-weather-container");
@@ -111,7 +113,14 @@ var currentWeatherSection = function(cityName) {
                     } else {
                         currentNumber.addClass("severe");
                     }
-                }) 
+                })
+        })
+        .catch(function(err) {
+            // reset search input
+            $("#search-input").val("");
+
+            // alert user that there was an error
+            alert("We could not find the city you searched for. Try searching for a valid city.");
         });
 };
 
@@ -181,7 +190,6 @@ $("#search-form").on("submit", function() {
         event.preventDefault();
     } else {
         // if cityName is valid, add it to search history list and display its weather conditions
-        searchHistoryList(cityName);
         currentWeatherSection(cityName);
         fiveDayForecastSection(cityName);
     }
