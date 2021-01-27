@@ -129,15 +129,15 @@ var fiveDayForecastSection = function(cityName) {
                     return response.json();
                 })
                 .then(function(response) {
+                    console.log(response);
+
                     // using data from response, set up each day of 5 day forecast
                     for (var i = 1; i <= 5; i++) {
                         // add date to 5 day forecast
                         var futureDate = $("#future-date-" + i);
-                        console.log(futureDate);
                         date = moment().add(i, "d").format("M/D/YYYY");
                         futureDate.text(date);
 
-                        console.log(response);
                         // add icon to 5 day forecast
                         var futureIcon = $("#future-icon-" + i);
                         futureIcon.addClass("future-icon");
@@ -156,6 +156,7 @@ var fiveDayForecastSection = function(cityName) {
         })
 };
 
+// called when the search form is submitted
 $("#search-form").on("submit", function() {
     event.preventDefault();
     
@@ -172,6 +173,14 @@ $("#search-form").on("submit", function() {
         currentWeatherSection(cityName);
         fiveDayForecastSection(cityName);
     }
+});
+
+// called when a search history entry is clicked
+$("#search-history-container").on("click", "p", function() {
+    // get text (city name) of entry and pass it as a parameter to display weather conditions
+    var previousCityName = $(this).text();
+    currentWeatherSection(previousCityName);
+    fiveDayForecastSection(previousCityName);
 });
 
 loadSearchHistory();
