@@ -72,7 +72,7 @@ var currentWeatherSection = function(cityName) {
                 })
                 // get data from response and apply them to the current weather section
                 .then(function(response){
-                     // add city name, date, and weather icon to current weather section title
+                    // add city name, date, and weather icon to current weather section title
                     var currentTitle = $("#current-title");
                     var currentDay = moment().format("M/D/YYYY");
                     currentTitle.text(`${cityName} (${currentDay})`);
@@ -80,9 +80,6 @@ var currentWeatherSection = function(cityName) {
                     currentIcon.addClass("current-weather-icon");
                     var currentIconCode = response.current.weather[0].icon;
                     currentIcon.attr("src", `http://openweathermap.org/img/wn/${currentIconCode}@2x.png`);
-
-                    console.log(response);
-
 
                     // add current temperature to page
                     var currentTemperature = $("#current-temperature");
@@ -114,6 +111,32 @@ var currentWeatherSection = function(cityName) {
         });
 };
 
+var fiveDayForecastSection = function(cityName) {
+    // get and use data from open weather current weather api end point
+    fetch(`http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`)
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(response) {
+            // get city's longitude and latitude
+            var cityLon = response.coord.lon;
+            var cityLat = response.coord.lat;
+
+            fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${cityLat}&lon=${cityLon}&exclude=minutely,hourly,alerts&units=imperial&appid=${apiKey}`)
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(response) {
+                    for (var i = 1; i <= 5; i++) {
+                        var futureDate = $("#future-date-" + i);
+                        console.log(futureDate);
+                        date = moment().add(i, "d").format("M/D/YYYY");
+                        futureDate.text(date);
+                    }
+                })
+        })
+};
+
 $("#search-form").on("submit", function() {
     event.preventDefault();
     
@@ -128,6 +151,7 @@ $("#search-form").on("submit", function() {
         // if cityName is valid, add it to search history list and display its weather conditions
         searchHistoryList(cityName);
         currentWeatherSection(cityName);
+        fiveDayForecastSection(cityName);
     }
 });
 
