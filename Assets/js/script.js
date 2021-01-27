@@ -58,7 +58,7 @@ var loadSearchHistory = function() {
 
 var currentWeatherSection = function(cityName) {
     // get and use data from open weather current weather api end point
-    fetch(`http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`)
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`)
         // get response and turn it into objects
         .then(function(response) {
             return response.json();
@@ -88,7 +88,7 @@ var currentWeatherSection = function(cityName) {
                     var currentIcon = $("#current-weather-icon");
                     currentIcon.addClass("current-weather-icon");
                     var currentIconCode = response.current.weather[0].icon;
-                    currentIcon.attr("src", `http://openweathermap.org/img/wn/${currentIconCode}@2x.png`);
+                    currentIcon.attr("src", `https://openweathermap.org/img/wn/${currentIconCode}@2x.png`);
 
                     // add current temperature to page
                     var currentTemperature = $("#current-temperature");
@@ -129,7 +129,7 @@ var currentWeatherSection = function(cityName) {
 
 var fiveDayForecastSection = function(cityName) {
     // get and use data from open weather current weather api end point
-    fetch(`http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`)
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`)
         // get response and turn it into objects
         .then(function(response) {
             return response.json();
@@ -166,7 +166,7 @@ var fiveDayForecastSection = function(cityName) {
                         var futureIcon = $("#future-icon-" + i);
                         futureIcon.addClass("future-icon");
                         var futureIconCode = response.daily[i].weather[0].icon;
-                        futureIcon.attr("src", `http://openweathermap.org/img/wn/${futureIconCode}@2x.png`);
+                        futureIcon.attr("src", `https://openweathermap.org/img/wn/${futureIconCode}@2x.png`);
 
                         // add temp to 5 day forecast
                         var futureTemp = $("#future-temp-" + i);
