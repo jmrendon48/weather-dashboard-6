@@ -4,6 +4,8 @@ var savedSearches = [];
 
 // make list of previously searched cities
 var searchHistoryList = function(cityName) {
+    $('.past-search:contains("' + cityName + '")').remove();
+
     // create entry with city name
     var searchHistoryEntry = $("<p>");
     searchHistoryEntry.addClass("past-search");
@@ -32,6 +34,7 @@ var searchHistoryList = function(cityName) {
 
     // reset search input
     $("#search-input").val("");
+
 };
 
 // load saved search history entries into search history container
