@@ -72,6 +72,10 @@ var currentWeatherSection = function(cityName) {
                 })
                 // get data from response and apply them to the current weather section
                 .then(function(response){
+                    // add current weather container with border to page
+                    var currentWeatherContainer = $("#current-weather-container");
+                    currentWeatherContainer.addClass("current-weather-container");
+
                     // add city name, date, and weather icon to current weather section title
                     var currentTitle = $("#current-title");
                     var currentDay = moment().format("M/D/YYYY");
@@ -131,8 +135,16 @@ var fiveDayForecastSection = function(cityName) {
                 .then(function(response) {
                     console.log(response);
 
+                    // add 5 day forecast title
+                    var futureForecastTitle = $("#future-forecast-title");
+                    futureForecastTitle.text("5-Day Forecast:")
+
                     // using data from response, set up each day of 5 day forecast
                     for (var i = 1; i <= 5; i++) {
+                        // add class to future cards to create card containers
+                        var futureCard = $(".future-card");
+                        futureCard.addClass("future-card-details");
+
                         // add date to 5 day forecast
                         var futureDate = $("#future-date-" + i);
                         date = moment().add(i, "d").format("M/D/YYYY");
