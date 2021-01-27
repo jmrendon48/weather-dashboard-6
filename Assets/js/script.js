@@ -66,7 +66,7 @@ var currentWeatherSection = function(cityName) {
             var cityLat = response.coord.lat;
 
             fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${cityLat}&lon=${cityLon}&exclude=minutely,hourly,alerts&units=imperial&appid=${apiKey}`)
-                // get response from one call api
+                // get response from one call api and turn it into objects
                 .then(function(response) {
                     return response.json();
                 })
@@ -83,7 +83,7 @@ var currentWeatherSection = function(cityName) {
 
                     // add current temperature to page
                     var currentTemperature = $("#current-temperature");
-                    currentTemperature.text("Temperature: " + response.current.temp + "\u00B0 F");
+                    currentTemperature.text("Temperature: " + response.current.temp + " \u00B0F");
 
                     // add current humidity to page
                     var currentHumidity = $("#current-humidity");
@@ -114,6 +114,7 @@ var currentWeatherSection = function(cityName) {
 var fiveDayForecastSection = function(cityName) {
     // get and use data from open weather current weather api end point
     fetch(`http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`)
+        // get response and turn it into objects
         .then(function(response) {
             return response.json();
         })
@@ -123,15 +124,33 @@ var fiveDayForecastSection = function(cityName) {
             var cityLat = response.coord.lat;
 
             fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${cityLat}&lon=${cityLon}&exclude=minutely,hourly,alerts&units=imperial&appid=${apiKey}`)
+                // get response from one call api and turn it into objects
                 .then(function(response) {
                     return response.json();
                 })
                 .then(function(response) {
+                    // using data from response, set up each day of 5 day forecast
                     for (var i = 1; i <= 5; i++) {
+                        // add date to 5 day forecast
                         var futureDate = $("#future-date-" + i);
                         console.log(futureDate);
                         date = moment().add(i, "d").format("M/D/YYYY");
                         futureDate.text(date);
+
+                        console.log(response);
+                        // add icon to 5 day forecast
+                        var futureIcon = $("#future-icon-" + i);
+                        futureIcon.addClass("future-icon");
+                        var futureIconCode = response.daily[i].weather[0].icon;
+                        futureIcon.attr("src", `http://openweathermap.org/img/wn/${futureIconCode}@2x.png`);
+
+                        // add temp to 5 day forecast
+                        var futureTemp = $("#future-temp-" + i);
+                        futureTemp.text("Temp: " + response.daily[i].temp.day + " \u00B0F");
+
+                        // add humidity to 5 day forecast
+                        var futureHumidity = $("#future-humidity-" + i);
+                        futureHumidity.text("Humidity: " + response.daily[i].humidity + "%");
                     }
                 })
         })
