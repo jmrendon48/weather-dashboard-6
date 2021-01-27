@@ -23,9 +23,7 @@ var searchHistoryList = function(cityName) {
     if (savedSearches.length > 0){
         // update savedSearches array with previously saved searches
         var previousSavedSearches = localStorage.getItem("savedSearches");
-        console.log(previousSavedSearches);
         savedSearches = JSON.parse(previousSavedSearches);
-        console.log(savedSearches);
     }
 
     // add city name to array of saved searches
@@ -56,22 +54,63 @@ var loadSearchHistory = function() {
 };
 
 var currentWeatherSection = function(cityName) {
-    // console.log(cityName);
-
     // get and use data from open weather current weather api end point
     fetch(`http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`)
         // get response and turn it into objects
         .then(function(response) {
             return response.json();
         })
-        // get city's longitude and latitude
         .then(function(response) {
+            // get city's longitude and latitude
             var cityLon = response.coord.lon;
             var cityLat = response.coord.lat;
-            // console.log(cityLon);
-            // console.log(cityLat);
 
-            // fetch(`http://`)
+            fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${cityLat}&lon=${cityLon}&exclude=minutely,hourly,alerts&units=imperial&appid=${apiKey}`)
+                // get response from one call api
+                .then(function(response) {
+                    return response.json();
+                })
+                // get data from response and apply them to the current weather section
+                .then(function(response){
+                     // add city name, date, and weather icon to current weather section title
+                    var currentTitle = $("#current-title");
+                    var currentDay = moment().format("M/D/YYYY");
+                    currentTitle.text(`${cityName} (${currentDay})`);
+                    var currentIcon = $("#current-weather-icon");
+                    currentIcon.addClass("current-weather-icon");
+                    var currentIconCode = response.current.weather[0].icon;
+                    currentIcon.attr("src", `http://openweathermap.org/img/wn/${currentIconCode}@2x.png`);
+
+                    console.log(response);
+
+
+                    // add current temperature to page
+                    var currentTemperature = $("#current-temperature");
+                    currentTemperature.text("Temperature: " + response.current.temp + "\u00B0 F");
+
+                    // add current humidity to page
+                    var currentHumidity = $("#current-humidity");
+                    currentHumidity.text("Humidity: " + response.current.humidity + "%");
+
+                    // add current wind speed to page
+                    var currentWindSpeed = $("#current-wind-speed");
+                    currentWindSpeed.text("Wind Speed: " + response.current.wind_speed + " MPH");
+
+                    // add uv index to page
+                    var currentUvIndex = $("#current-uv-index");
+                    currentUvIndex.text("UV Index: ");
+                    var currentNumber = $("#current-number");
+                    currentNumber.text(response.current.uvi);
+
+                    // add appropriate background color to current uv index number
+                    if (response.current.uvi <= 2) {
+                        currentNumber.addClass("favorable");
+                    } else if (response.current.uvi >= 3 && response.current.uvi <= 7) {
+                        currentNumber.addClass("moderate");
+                    } else {
+                        currentNumber.addClass("severe");
+                    }
+                }) 
         });
 };
 
