@@ -4,7 +4,7 @@ An application that utilizes the third-party API, OpenWeather, to retrieve weath
 
 # Screenshot
 
-![weather dashboard screenshot](./Assets/images/06-server-side-apis-homework-demo.png)
+![weather dashboard screenshot](./Assets/images/screenshot.png);
 
 # Link to Deployed Application
 
